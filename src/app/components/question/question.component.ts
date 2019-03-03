@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {QuizService} from '../../services/quiz.service';
 import {ActivatedRoute} from '@angular/router';
+import {Question} from '../../value-types/question';
 
 @Component({
   selector: 'app-question',
@@ -9,22 +10,23 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class QuestionComponent implements OnInit {
 
+  question: Question;
   private questionId: number;
 
-  constructor(private quizService: QuizService,
-              private route: ActivatedRoute) { }
+  constructor(private quizService: QuizService) {
+  }
 
   ngOnInit() {
+    this.questionId = 0;
     this.getQuestion();
   }
 
   getQuestion() {
-    this.questionId = Number(this.route.snapshot.paramMap.get('questionId'));
-
     this.quizService.getQuestion(this.questionId).subscribe(question => {
       if (question != null) {
         console.log('Loaded question successfully');
         console.log(question);
+        this.question = question;
       } else {
         console.log('An error occurred while loading the question!');
       }

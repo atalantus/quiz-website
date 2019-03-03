@@ -9,12 +9,12 @@ export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const question = [
       {
-        question: 'Question 1', answers:
+        question: 'Which fictional city is the home of Batman?', answers:
           [
-            'Answer A',
-            'Answer B',
-            'Answer C',
-            'Answer D'
+            'Gotham City',
+            'Munich',
+            'New York',
+            'Atlantis'
           ],
         id: 0
       },

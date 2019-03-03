@@ -1,13 +1,14 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { QuestionComponent } from './components/question/question.component';
-import { AppRoutingModule } from './app-routing.module';
+import {AppComponent} from './app.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {QuestionComponent} from './components/question/question.component';
+import {AppRoutingModule} from './app-routing.module';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from './in-memory-data.service';
 import {HttpClientModule} from '@angular/common/http';
+import {MatCardModule, MatCheckboxModule, MatProgressSpinnerModule, MatRippleModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -25,8 +26,13 @@ import {HttpClientModule} from '@angular/common/http';
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, {dataEncapsulation: false, passThruUnknownUrl: false, delay: 1000}
     ),
+    MatCardModule,
+    MatProgressSpinnerModule,
+    MatRippleModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -1,0 +1,56 @@
+#questionContainer {
+  margin-top: 20vh;
+
+  #questionCard {
+    text-align: center;
+  }
+
+  #answerContainer {
+    margin-top: 10vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    mat-card {
+      margin-bottom: 10px;
+      text-align: center;
+      width: 400px;
+      min-width: 100px;
+
+      &:hover {
+        background: rgba(0, 0, 0, .04);
+        cursor: pointer;
+      }
+    }
+
+    @media (min-width: 768px) {
+      mat-card {
+        width: 500px;
+      }
+    }
+
+    @media (min-width: 992px) {
+      mat-card {
+        width: 970px;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      mat-card {
+        width: 400px;
+      }
+    }
+  }
+}
+
+#loadingQuestionContainer {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
