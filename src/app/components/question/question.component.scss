@@ -3,6 +3,32 @@
 
   #questionCard {
     text-align: center;
+
+    mat-card-header {
+      flex-direction: row-reverse;
+      margin-bottom: 12px;
+
+      div.mat-h2 {
+        margin-bottom: 0;
+      }
+    }
+
+    mat-card-content.mat-headline {
+      font-size: 24px;
+    }
+
+    mat-card-actions {
+      margin-bottom: -16px;
+      margin-left: -16px;
+      margin-right: -16px;
+      height: 4px;
+      
+      mat-progress-bar {
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+      }
+    }
   }
 
   #answerContainer {
@@ -40,6 +66,12 @@
         width: 400px;
       }
     }
+  }
+
+  #questionActionsContainer {
+    margin-top: 15vh;
+    display: flex;
+    flex-direction: row-reverse;
   }
 }
 

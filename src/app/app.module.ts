@@ -8,7 +8,14 @@ import {AppRoutingModule} from './app-routing.module';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from './in-memory-data.service';
 import {HttpClientModule} from '@angular/common/http';
-import {MatCardModule, MatCheckboxModule, MatProgressSpinnerModule, MatRippleModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRippleModule
+} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -29,7 +36,9 @@ import {MatCardModule, MatCheckboxModule, MatProgressSpinnerModule, MatRippleMod
     MatCardModule,
     MatProgressSpinnerModule,
     MatRippleModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatButtonModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

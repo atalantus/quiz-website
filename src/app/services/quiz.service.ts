@@ -18,19 +18,29 @@ export class QuizService {
 
   /**
    * GET - get`s a question
-   * @param questionId - the id of the question
    * @return - null if an error occurred otherwise a Question object
    */
-  getQuestion(questionId: number): Observable<Question | null> {
-    return this.http.get<Question>(`api/question/${questionId}`)
+  getQuestion(): Observable<Question | null> {
+    return this.http.get<Question>(`api/question`)
       .pipe(
-        tap(data => console.log(`QuizSerivce - getQuestion(${questionId})`)),
+        tap(data => console.log(`QuizSerivce - getQuestion()`)),
         map(data => {
           const q = new Question();
           q.loadData(data);
           return q;
         }),
-        catchError(this.handleError(`getQuestion${questionId}`, null))
+        catchError(this.handleError(`getQuestion()`, null))
+      );
+  }
+
+  /**
+   * GET - get`s the total amount of questions
+   */
+  getQuestionAmount(): Observable<number> {
+    return this.http.get<number>(`api/question/total`)
+      .pipe(
+        tap(data => console.log(`QuizService - getQuestionAmount()`)),
+        catchError(this.handleError(`getQuestionAmount`, -1))
       );
   }
 

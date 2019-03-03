@@ -1,16 +1,44 @@
 <div class="container">
   <div id="questionContainer">
     <div *ngIf="question != undefined">
-      <mat-card class="mat-headline mat-elevation-z4" id="questionCard">
-        {{question.question}}
+
+      <mat-card class="mat-elevation-z4" id="questionCard">
+
+        <mat-card-header>
+          <div class="mat-h2">
+            Question: {{currentQuestion}}/{{questionsAmount}}
+          </div>
+        </mat-card-header>
+
+        <mat-card-content class="mat-headline">
+          {{question.question}}
+        </mat-card-content>
+
+        <mat-card-actions>
+          <mat-progress-bar *ngIf="loadingQuestion" color="primary" mode="query"></mat-progress-bar>
+        </mat-card-actions>
+
       </mat-card>
 
       <div id="answerContainer">
-        <mat-card mat-ripple><mat-checkbox>{{question.answers[0]}}</mat-checkbox></mat-card>
-        <mat-card mat-ripple><mat-checkbox>{{question.answers[1]}}</mat-checkbox></mat-card>
-        <mat-card mat-ripple><mat-checkbox>{{question.answers[2]}}</mat-checkbox></mat-card>
-        <mat-card mat-ripple><mat-checkbox>{{question.answers[3]}}</mat-checkbox></mat-card>
+        <mat-card mat-ripple>
+          <mat-checkbox>{{question.answers[0]}}</mat-checkbox>
+        </mat-card>
+        <mat-card mat-ripple>
+          <mat-checkbox>{{question.answers[1]}}</mat-checkbox>
+        </mat-card>
+        <mat-card mat-ripple>
+          <mat-checkbox>{{question.answers[2]}}</mat-checkbox>
+        </mat-card>
+        <mat-card mat-ripple>
+          <mat-checkbox>{{question.answers[3]}}</mat-checkbox>
+        </mat-card>
       </div>
+
+      <div id="questionActionsContainer">
+        <button mat-raised-button color="{{currentQuestion < questionsAmount ? 'primary' : 'accent'}}" (click)="continue()">{{currentQuestion < questionsAmount ? 'Next question' : 'Show results'}}</button>
+      </div>
+
     </div>
   </div>
   <div *ngIf="question == undefined" id="loadingQuestionContainer">

@@ -6,49 +6,51 @@ import {InMemoryDbService, ParsedRequestUrl, RequestInfoUtilities} from 'angular
 })
 export class InMemoryDataService implements InMemoryDbService {
 
+  question = [
+    {
+      question: 'Which fictional city is the home of Batman?', answers:
+        [
+          'Gotham City',
+          'Munich',
+          'New York',
+          'Atlantis'
+        ],
+      id: 0
+    },
+    {
+      question: 'Which planet is nearest the sun?', answers:
+        [
+          'Earth',
+          'Mercury',
+          'Mars',
+          'Venus'
+        ],
+      id: 1
+    },
+    {
+      question: 'What is the largest number of five digits?', answers:
+        [
+          '00000',
+          '1234567890',
+          '99999',
+          '23495'
+        ],
+      id: 2
+    },
+    {
+      question: 'What colour to do you get when you mix red and white?', answers:
+        [
+          'Blue',
+          'White',
+          'Red',
+          'Pink'
+        ],
+      id: 3
+    }
+  ];
+
   createDb() {
-    const question = [
-      {
-        question: 'Which fictional city is the home of Batman?', answers:
-          [
-            'Gotham City',
-            'Munich',
-            'New York',
-            'Atlantis'
-          ],
-        id: 0
-      },
-      {
-        question: 'Question 2', answers:
-          [
-            'Answer A',
-            'Answer B',
-            'Answer C',
-            'Answer D'
-          ],
-        id: 1
-      },
-      {
-        question: 'Question 3', answers:
-          [
-            'Answer A',
-            'Answer B',
-            'Answer C',
-            'Answer D'
-          ],
-        id: 2
-      },
-      {
-        question: 'Question 4', answers:
-          [
-            'Answer A',
-            'Answer B',
-            'Answer C',
-            'Answer D'
-          ],
-        id: 3
-      }
-    ];
+    const question = this.question;
 
     const questionCorrectAnswer = [
       {questionId: 0, correctAnswerIndex: 0},
@@ -57,7 +59,9 @@ export class InMemoryDataService implements InMemoryDbService {
       {questionId: 3, correctAnswerIndex: 3},
     ];
 
-    return {question, questionCorrectAnswer};
+    const questionsAmount = this.question.length;
+
+    return {question, questionCorrectAnswer, questionsAmount};
   }
 
   parseRequestUrl(url: string, requestInfoUtils: RequestInfoUtilities): ParsedRequestUrl {
@@ -67,6 +71,12 @@ export class InMemoryDataService implements InMemoryDbService {
       console.log(requestInfoUtils);
 
       newUrl = 'api/questionCorrectAnswer?questionId=0';
+    } else if (url === 'api/question/total') {
+      newUrl = 'api/questionsAmount';
+    } else if (url === 'api/question') {
+      const questionId = Math.floor(Math.random() * this.question.length);
+
+      newUrl = `api/question/${questionId}`;
     } else {
       newUrl = url;
     }

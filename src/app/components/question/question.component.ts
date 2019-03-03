@@ -11,25 +11,53 @@ import {Question} from '../../value-types/question';
 export class QuestionComponent implements OnInit {
 
   question: Question;
-  private questionId: number;
+  private currentQuestion: number;
+  questionsAmount: number;
+
+  loadingQuestion: boolean;
 
   constructor(private quizService: QuizService) {
   }
 
   ngOnInit() {
-    this.questionId = 0;
+    this.currentQuestion = 1;
+    this.getQuestionsAmount();
     this.getQuestion();
   }
 
+  getQuestionsAmount() {
+    this.quizService.getQuestionAmount().subscribe(amount => {
+      if (amount !== -1) {
+        console.log('Loaded total amount of questions successfully');
+        console.log(amount);
+        this.questionsAmount = amount;
+      } else {
+        console.log('An error occurred while loadingQuestion the total amount of questions!');
+      }
+    });
+  }
+
   getQuestion() {
-    this.quizService.getQuestion(this.questionId).subscribe(question => {
+    this.loadingQuestion = true;
+    this.quizService.getQuestion().subscribe(question => {
+      this.loadingQuestion = false;
       if (question != null) {
         console.log('Loaded question successfully');
         console.log(question);
         this.question = question;
       } else {
-        console.log('An error occurred while loading the question!');
+        console.log('An error occurred while loadingQuestion the question!');
       }
     });
+  }
+
+  continue() {
+    if (this.currentQuestion < this.questionsAmount) {
+      // Load next question
+      this.getQuestion();
+      this.currentQuestion++;
+    } else {
+      console.log('Show results');
+    }
   }
 }
