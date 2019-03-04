@@ -5,10 +5,10 @@ export class Question {
   public loadData(data) {
     this.question = data.question;
     this.answers = [
-      data.answers[0],
-      data.answers[1],
-      data.answers[2],
-      data.answers[3]
+      data.answer1,
+      data.answer2,
+      data.answer3,
+      data.answer4
     ];
   }
 }

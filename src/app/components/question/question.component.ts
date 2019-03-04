@@ -43,9 +43,16 @@ export class QuestionComponent implements OnInit {
   }
 
   getQuestion() {
-    this.loadingQuestion = true;
     this.quizService.getQuestion().subscribe(question => {
       this.loadingQuestion = false;
+
+      if (this.answerACheckbox !== undefined) {
+        this.answerACheckbox.checked = false;
+        this.answerBCheckbox.checked = false;
+        this.answerCCheckbox.checked = false;
+        this.answerDCheckbox.checked = false;
+      }
+
       if (question != null) {
         console.log('Loaded question successfully');
         console.log(question);
@@ -58,12 +65,40 @@ export class QuestionComponent implements OnInit {
 
   continue() {
     if (this.currentQuestion < this.questionsAmount) {
-      // Load next question
-      this.getQuestion();
-      this.currentQuestion++;
+      // Send answers
+      this.sendAnswers();
+
+
     } else {
       console.log('Show results');
     }
+  }
+
+  sendAnswers() {
+    this.loadingQuestion = true;
+
+    const answers = [];
+
+    if (this.answerACheckbox.checked) {
+      answers.push(0);
+    }
+    if (this.answerBCheckbox.checked) {
+      answers.push(1);
+    }
+    if (this.answerCCheckbox.checked) {
+      answers.push(2);
+    }
+    if (this.answerDCheckbox.checked) {
+      answers.push(3);
+    }
+
+    this.quizService.checkAnswer(0, answers).subscribe(value => {
+      console.log(`Answered question correct: ${value}`);
+
+      // Load next question
+      this.getQuestion();
+      this.currentQuestion++;
+    });
   }
 
   clickedCard(answer: number) {
