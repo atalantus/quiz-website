@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {QuizService} from '../../services/quiz.service';
 import {ActivatedRoute} from '@angular/router';
 import {Question} from '../../value-types/question';
@@ -11,10 +11,15 @@ import {Question} from '../../value-types/question';
 export class QuestionComponent implements OnInit {
 
   question: Question;
-  private currentQuestion: number;
+  currentQuestion: number;
   questionsAmount: number;
-
   loadingQuestion: boolean;
+
+  @ViewChild('answerACheckbox') answerACheckbox;
+  @ViewChild('answerBCheckbox') answerBCheckbox;
+  @ViewChild('answerCCheckbox') answerCCheckbox;
+  @ViewChild('answerDCheckbox') answerDCheckbox;
+  private alreadyToggled = false;
 
   constructor(private quizService: QuizService) {
   }
@@ -59,5 +64,32 @@ export class QuestionComponent implements OnInit {
     } else {
       console.log('Show results');
     }
+  }
+
+  clickedCard(answer: number) {
+    if (this.alreadyToggled) {
+      this.alreadyToggled = false;
+      return;
+    }
+
+    let el;
+
+    switch (answer) {
+      case 0:
+        el = this.answerACheckbox;
+        break;
+      case 1:
+        el = this.answerBCheckbox;
+        break;
+      case 2:
+        el = this.answerCCheckbox;
+        break;
+      case 3:
+        el = this.answerDCheckbox;
+        break;
+    }
+
+    el.toggle();
+    el.ripple.launch();
   }
 }

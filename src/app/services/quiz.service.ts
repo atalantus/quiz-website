@@ -4,10 +4,6 @@ import {Observable, of} from 'rxjs';
 import {Question} from '../value-types/question';
 import {catchError, map, tap} from 'rxjs/operators';
 
-const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
-};
-
 @Injectable({
   providedIn: 'root'
 })
@@ -40,22 +36,25 @@ export class QuizService {
     return this.http.get<number>(`api/question/total`)
       .pipe(
         tap(data => console.log(`QuizService - getQuestionAmount()`)),
-        catchError(this.handleError(`getQuestionAmount`, -1))
+        catchError(this.handleError(`getQuestionAmount()`, -1))
       );
   }
 
   /**
-   * POST - checks if a question was correctly answered
+   * GET - checks if a question was correctly answered
    * @param questionId - id of the question
-   * @param answerIndex - index of the chosen answer
+   * @param answerIndexes - indexes of the chosen answers
    */
-  checkAnswer(questionId: number, answerIndex: number): Observable<boolean | null> {
-    return this.http.post<boolean>(`api/checkAnswer`, {questionId, answerIndex}, httpOptions)
+  checkAnswer(questionId: number, answerIndexes: number[]): Observable<boolean | null> {
+    const chosenAnswerIndexes = answerIndexes.map(i => i + 1).join('');
+
+    return this.http.get<boolean>(`api/checkAnswer?answer=${chosenAnswerIndexes}`)
       .pipe(
-        tap(data => console.log(`QuizService - checkAnswer(${questionId}, ${answerIndex})`)),
-        catchError(this.handleError('checkAnswer', null))
+        tap(value => console.log(`QuizService - checkAnswer(${questionId}, ${chosenAnswerIndexes})`)),
+        catchError(this.handleError(`checkAnswer(${questionId}, ${chosenAnswerIndexes})`, null))
       );
   }
+
 
   /**
    * Handle Http operation that failed.

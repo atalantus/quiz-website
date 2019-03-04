@@ -21,17 +21,17 @@
       </mat-card>
 
       <div id="answerContainer">
-        <mat-card mat-ripple>
-          <mat-checkbox>{{question.answers[0]}}</mat-checkbox>
+        <mat-card mat-ripple (click)="clickedCard(0)">
+          <mat-checkbox #answerACheckbox (click)="alreadyToggled = true;">{{question.answers[0]}}</mat-checkbox>
         </mat-card>
-        <mat-card mat-ripple>
-          <mat-checkbox>{{question.answers[1]}}</mat-checkbox>
+        <mat-card mat-ripple (click)="clickedCard(1)">
+          <mat-checkbox #answerBCheckbox (click)="alreadyToggled = true;">{{question.answers[1]}}</mat-checkbox>
         </mat-card>
-        <mat-card mat-ripple>
-          <mat-checkbox>{{question.answers[2]}}</mat-checkbox>
+        <mat-card mat-ripple (click)="clickedCard(2)">
+          <mat-checkbox #answerCCheckbox (click)="alreadyToggled = true;">{{question.answers[2]}}</mat-checkbox>
         </mat-card>
-        <mat-card mat-ripple>
-          <mat-checkbox>{{question.answers[3]}}</mat-checkbox>
+        <mat-card mat-ripple (click)="clickedCard(3)">
+          <mat-checkbox #answerDCheckbox (click)="alreadyToggled = true;">{{question.answers[3]}}</mat-checkbox>
         </mat-card>
       </div>
 
