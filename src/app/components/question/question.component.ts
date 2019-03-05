@@ -31,6 +31,7 @@ export class QuestionComponent implements OnInit {
   }
 
   getQuestionsAmount() {
+    /*
     this.quizService.getQuestionAmount().subscribe(amount => {
       if (amount !== -1) {
         console.log('Loaded total amount of questions successfully');
@@ -40,6 +41,8 @@ export class QuestionComponent implements OnInit {
         console.log('An error occurred while loadingQuestion the total amount of questions!');
       }
     });
+    */
+    this.questionsAmount = 5;
   }
 
   getQuestion() {
@@ -58,7 +61,7 @@ export class QuestionComponent implements OnInit {
         console.log(question);
         this.question = question;
       } else {
-        console.log('An error occurred while loadingQuestion the question!');
+        console.log('An error occurred while loading the question!');
       }
     });
   }

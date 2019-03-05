@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
+import {Observable, of, pipe} from 'rxjs';
 import {Question} from '../value-types/question';
 import {catchError, map, tap} from 'rxjs/operators';
 
-const apiBaseUrl = 'api';
+const apiBaseUrl = 'rest/demo';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,14 @@ const apiBaseUrl = 'api';
 export class QuizService {
 
   constructor(private http: HttpClient) {
+  }
+
+  registerUser(uuid: string): Observable<undefined> {
+    return this.http.get<undefined>(`${apiBaseUrl}/start?userid=${uuid}`)
+      .pipe(
+        tap(data => console.log(`QuizService - registerUser(${uuid})`)),
+        catchError(this.handleError(`registerUser(${uuid})`, null))
+      );
   }
 
   /**

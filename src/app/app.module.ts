@@ -16,11 +16,13 @@ import {
   MatProgressSpinnerModule,
   MatRippleModule
 } from '@angular/material';
+import {HomeComponent} from './components/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    QuestionComponent
+    QuestionComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -30,9 +32,11 @@ import {
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // TODO: Remove it when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, {dataEncapsulation: false, passThruUnknownUrl: false, delay: 1000}
-    ),
+    /*
+      HttpClientInMemoryWebApiModule.forRoot(
+        InMemoryDataService, {dataEncapsulation: false, passThruUnknownUrl: false, delay: 1000}
+      ),
+    */
     MatCardModule,
     MatProgressSpinnerModule,
     MatRippleModule,
