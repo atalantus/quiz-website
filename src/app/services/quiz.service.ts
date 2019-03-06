@@ -58,7 +58,7 @@ export class QuizService {
   checkAnswer(questionId: number, answerIndexes: number[]): Observable<boolean | null> {
     const chosenAnswerIndexes = answerIndexes.map(i => i + 1).join('');
 
-    return this.http.get<boolean>(`${apiBaseUrl}/sendAnswer?answer=${chosenAnswerIndexes}`)
+    return this.http.get<boolean>(`${apiBaseUrl}/sendAnswer?qid=${questionId}&answer=${chosenAnswerIndexes}`)
       .pipe(
         tap(value => console.log(`QuizService - checkAnswer(${questionId}, ${chosenAnswerIndexes})`)),
         catchError(this.handleError(`checkAnswer(${questionId}, ${chosenAnswerIndexes})`, null))

@@ -1,0 +1,20 @@
+<div class="container" id="resultContainer">
+  <div class="mat-display-3">Result</div>
+
+    <mat-progress-spinner
+      class="absolute-center"
+      color="primary"
+      mode="determinate"
+      value="{{resultValue}}"
+      diameter="200"
+      strokeWidth="10">
+    </mat-progress-spinner>
+    <div class="mat-display-2 absolute-center">{{resultValueStr}}%</div>
+
+    <table class="hidden" #resultDataTable>
+      <tr>
+        <td class="mat-h2">Correct answers:</td>
+        <td class="mat-h2">{{correctAnswered}}/{{totalQuestions}}</td>
+      </tr>
+    </table>
+</div>

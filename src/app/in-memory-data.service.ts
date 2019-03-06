@@ -44,33 +44,30 @@ export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const question = this.question;
 
-    const questionCorrectAnswer = [
-      {questionId: 0, correctAnswerIndex: 0},
-      {questionId: 1, correctAnswerIndex: 1},
-      {questionId: 2, correctAnswerIndex: 2},
-      {questionId: 3, correctAnswerIndex: 3},
-    ];
+    const questionCorrectAnswer = true;
 
     const questionsAmount = this.question.length;
 
-    return {question, questionCorrectAnswer, questionsAmount};
+    const registerUser = {};
+
+    return {question, questionCorrectAnswer, questionsAmount, registerUser};
   }
 
   parseRequestUrl(url: string, requestInfoUtils: RequestInfoUtilities): ParsedRequestUrl {
     let newUrl = '';
 
-    if (url === 'api/sendAnswer') {
+    if (url.includes('rest/demo/sendAnswer')) {
       console.log(requestInfoUtils);
 
-      newUrl = 'api/questionCorrectAnswer?questionId=0';
-    } else if (url === 'api/question/total') {
+      newUrl = 'api/questionCorrectAnswer';
+    } else if (url === 'rest/demo/question/total') {
       newUrl = 'api/questionsAmount';
-    } else if (url === 'api/getQuestion') {
+    } else if (url === 'rest/demo/getQuestion') {
       const questionId = Math.floor(Math.random() * this.question.length);
 
       newUrl = `api/question/${questionId}`;
-    } else {
-      newUrl = url;
+    } else if (url.includes('rest/demo/start?userid')) {
+      newUrl = 'api/registerUser';
     }
 
     return requestInfoUtils.parseRequestUrl(newUrl);

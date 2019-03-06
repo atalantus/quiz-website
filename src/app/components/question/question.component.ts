@@ -1,7 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {QuizService} from '../../services/quiz.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Question} from '../../value-types/question';
+import {QuizResultService} from '../../services/quiz-result.service';
 
 @Component({
   selector: 'app-question',
@@ -20,8 +21,11 @@ export class QuestionComponent implements OnInit {
   @ViewChild('answerCCheckbox') answerCCheckbox;
   @ViewChild('answerDCheckbox') answerDCheckbox;
   private alreadyToggled = false;
+  private correctAnsweredQuestions = 0;
 
-  constructor(private quizService: QuizService) {
+  constructor(private quizService: QuizService,
+              private quizResultService: QuizResultService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -67,14 +71,8 @@ export class QuestionComponent implements OnInit {
   }
 
   continue() {
-    if (this.currentQuestion < this.questionsAmount) {
-      // Send answers
-      this.sendAnswers();
-
-
-    } else {
-      console.log('Show results');
-    }
+    // Send answers
+    this.sendAnswers();
   }
 
   sendAnswers() {
@@ -95,12 +93,23 @@ export class QuestionComponent implements OnInit {
       answers.push(3);
     }
 
-    this.quizService.checkAnswer(0, answers).subscribe(value => {
+    this.quizService.checkAnswer(this.question.id, answers).subscribe(value => {
       console.log(`Answered question correct: ${value}`);
 
-      // Load next question
-      this.getQuestion();
-      this.currentQuestion++;
+      if (value) {
+        this.correctAnsweredQuestions++;
+      }
+
+      if (this.currentQuestion >= this.questionsAmount) {
+        this.quizResultService.correctAnswered = this.correctAnsweredQuestions;
+        this.quizResultService.totalQuestions = this.questionsAmount;
+
+        this.router.navigateByUrl('/result');
+      } else {
+        // Load next question
+        this.getQuestion();
+        this.currentQuestion++;
+      }
     });
   }
 
