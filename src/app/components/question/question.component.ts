@@ -46,7 +46,7 @@ export class QuestionComponent implements OnInit {
       }
     });
     */
-    this.questionsAmount = 5;
+    this.questionsAmount = 10;
   }
 
   getQuestion() {

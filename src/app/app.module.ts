@@ -11,13 +11,14 @@ import {HttpClientModule} from '@angular/common/http';
 import {
   MatButtonModule,
   MatCardModule,
-  MatCheckboxModule,
+  MatCheckboxModule, MatFormFieldModule, MatInputModule,
   MatProgressBarModule,
   MatProgressSpinnerModule,
   MatRippleModule
 } from '@angular/material';
 import {HomeComponent} from './components/home/home.component';
-import { ResultComponent } from './components/result/result.component';
+import {ResultComponent} from './components/result/result.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,17 +35,18 @@ import { ResultComponent } from './components/result/result.component';
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // TODO: Remove it when a real server is ready to receive requests.
-
-      HttpClientInMemoryWebApiModule.forRoot(
-        InMemoryDataService, {dataEncapsulation: false, passThruUnknownUrl: false, delay: 1000}
-      ),
-
+    /*
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, {dataEncapsulation: false, passThruUnknownUrl: false, delay: 1000}
+    ),
+    */
     MatCardModule,
     MatProgressSpinnerModule,
     MatRippleModule,
     MatCheckboxModule,
     MatButtonModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

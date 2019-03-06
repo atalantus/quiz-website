@@ -1,4 +1,10 @@
 <div class="container" id="homeContainer">
-  <div class="mat-display-3">Quiz</div>
-  <button mat-raised-button color="primary" (click)="startQuiz()">Start Quiz</button>
+  <div class="mat-display-3">SME Certification Test</div>
+  <div id="contentContainer">
+    <mat-form-field appearance="outline">
+      <mat-label>User ID</mat-label>
+      <input matInput #userIdInput>
+    </mat-form-field>
+    <button [disabled]="!userIdInput.value" mat-raised-button color="primary" (click)="startQuiz()">Start Test</button>
+  </div>
 </div>
