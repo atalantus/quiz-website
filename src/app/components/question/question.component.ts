@@ -1,13 +1,14 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {QuizService} from '../../services/quiz.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {Question} from '../../value-types/question';
 import {QuizResultService} from '../../services/quiz-result.service';
 
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
-  styleUrls: ['./question.component.scss']
+  styleUrls: ['./question.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class QuestionComponent implements OnInit {
 
