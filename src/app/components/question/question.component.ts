@@ -22,7 +22,6 @@ export class QuestionComponent implements OnInit {
   @ViewChild('answerCCheckbox') answerCCheckbox;
   @ViewChild('answerDCheckbox') answerDCheckbox;
   private alreadyToggled = false;
-  private correctAnsweredQuestions = 0;
 
   constructor(private quizService: QuizService,
               private quizResultService: QuizResultService,
@@ -36,7 +35,6 @@ export class QuestionComponent implements OnInit {
   }
 
   getQuestionsAmount() {
-    /*
     this.quizService.getQuestionAmount().subscribe(amount => {
       if (amount !== -1) {
         console.log('Loaded total amount of questions successfully');
@@ -44,10 +42,11 @@ export class QuestionComponent implements OnInit {
         this.questionsAmount = amount;
       } else {
         console.log('An error occurred while loadingQuestion the total amount of questions!');
+        this.questionsAmount = 10;
       }
+
+      this.quizResultService.totalQuestions = this.questionsAmount;
     });
-    */
-    this.questionsAmount = 10;
   }
 
   getQuestion() {
@@ -97,15 +96,13 @@ export class QuestionComponent implements OnInit {
     this.quizService.checkAnswer(this.question.id, answers).subscribe(value => {
       console.log(`Answered question correct: ${value}`);
 
-      if (value) {
-        this.correctAnsweredQuestions++;
-      }
-
       if (this.currentQuestion >= this.questionsAmount) {
-        this.quizResultService.correctAnswered = this.correctAnsweredQuestions;
-        this.quizResultService.totalQuestions = this.questionsAmount;
 
-        this.router.navigateByUrl('/result');
+        this.quizResultService.getCorrectQuestionsAmount(this.quizResultService.userId).subscribe(amount => {
+          this.quizResultService.correctAnsweredQuestions = amount;
+
+          this.router.navigateByUrl('/result');
+        });
       } else {
         // Load next question
         this.getQuestion();

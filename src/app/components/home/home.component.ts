@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {QuizService} from '../../services/quiz.service';
 import {Router} from '@angular/router';
+import {QuizResultService} from '../../services/quiz-result.service';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,7 @@ export class HomeComponent implements OnInit {
   @ViewChild('userIdInput') userIdInput;
 
   constructor(private quizService: QuizService,
+              private quizResultService: QuizResultService,
               private router: Router) {
   }
 
@@ -20,6 +22,8 @@ export class HomeComponent implements OnInit {
 
   startQuiz() {
     const uuid = this.userIdInput.nativeElement.value;
+
+    this.quizResultService.userId = uuid;
 
     this.quizService.registerUser(uuid).subscribe(value => {
         // Start quiz

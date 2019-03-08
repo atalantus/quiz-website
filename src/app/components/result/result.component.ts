@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ViewChild, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {QuizResultService} from '../../services/quiz-result.service';
 
 @Component({
@@ -22,7 +22,7 @@ export class ResultComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.correctAnswered = this.quizResultService.correctAnswered;
+    this.correctAnswered = this.quizResultService.correctAnsweredQuestions;
     this.totalQuestions = this.quizResultService.totalQuestions;
 
     this.targetResult = +(this.correctAnswered / this.totalQuestions * 100).toFixed(0);
@@ -35,7 +35,7 @@ export class ResultComponent implements AfterViewInit {
       this.correctAnswered = 0;
     }
 
-    if (isNaN(this.totalQuestions)){
+    if (isNaN(this.totalQuestions)) {
       this.totalQuestions = 0;
     }
 

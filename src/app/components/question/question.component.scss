@@ -1,6 +1,6 @@
 .container {
   height: 100%;
-  overflow: scroll;
+  overflow: auto;
 
   #questionContainer {
     margin-top: 10vh;
@@ -44,7 +44,6 @@
 
       mat-card {
         margin-bottom: 10px;
-        text-align: center;
         width: 400px;
         min-width: 100px;
 
@@ -107,5 +106,6 @@
 }
 
 .mat-checkbox-layout {
+  text-align: start;
   white-space: normal !important;
 }

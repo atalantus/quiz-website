@@ -43,7 +43,7 @@ export class QuizService {
    * GET - get`s the total amount of questions
    */
   getQuestionAmount(): Observable<number> {
-    return this.http.get<number>(`${apiBaseUrl}/question/total`)
+    return this.http.get<number>(`${apiBaseUrl}/getNumberOfQuestions`)
       .pipe(
         tap(data => console.log(`QuizService - getQuestionAmount()`)),
         catchError(this.handleError(`getQuestionAmount()`, -1))
