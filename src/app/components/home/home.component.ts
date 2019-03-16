@@ -21,13 +21,14 @@ export class HomeComponent implements OnInit {
   }
 
   startQuiz() {
-    const uuid = this.userIdInput.nativeElement.value;
+    const uid = this.userIdInput.nativeElement.value;
 
-    this.quizResultService.userId = uuid;
+    this.quizResultService.userId = uid;
 
-    this.quizService.registerUser(uuid).subscribe(value => {
-        // Start quiz
-        this.router.navigateByUrl('/question');
+    this.quizService.registerUser(uid).subscribe(uuid => {
+      this.quizResultService.uuid = uuid;
+      // Start quiz
+      this.router.navigateByUrl('/question');
     });
   }
 }

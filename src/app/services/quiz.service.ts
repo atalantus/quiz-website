@@ -14,33 +14,40 @@ export class QuizService {
   constructor(private http: HttpClient) {
   }
 
-  registerUser(uuid: string): Observable<undefined> {
-    return this.http.get<undefined>(`${apiBaseUrl}/start?userid=${uuid}`)
+  /**
+   * GET - registers a new user
+   * @param uid - id of the user
+   * @return - the unique user id for the client
+   */
+  registerUser(uid: string): Observable<string> {
+    return this.http.get<string>(`${apiBaseUrl}/start?userid=${uid}`)
       .pipe(
-        tap(data => console.log(`QuizService - registerUser(${uuid})`)),
-        catchError(this.handleError(`registerUser(${uuid})`, null))
+        tap(data => console.log(`QuizService - registerUser(${uid})`)),
+        catchError(this.handleError(`registerUser(${uid})`, ''))
       );
   }
 
   /**
    * GET - get`s a question
+   * @param uuid - unique user id
    * @return - null if an error occurred otherwise a Question object
    */
-  getQuestion(): Observable<Question | null> {
-    return this.http.get<Question>(`${apiBaseUrl}/getQuestion`)
+  getQuestion(uuid: string): Observable<Question | null> {
+    return this.http.get<Question>(`${apiBaseUrl}/getQuestion?uuid=${uuid}`)
       .pipe(
-        tap(data => console.log(`QuizSerivce - getQuestion()`)),
+        tap(data => console.log(`QuizSerivce - getQuestion(${uuid})`)),
         map(data => {
           const q = new Question();
           q.loadData(data);
           return q;
         }),
-        catchError(this.handleError(`getQuestion()`, null))
+        catchError(this.handleError(`getQuestion(${uuid})`, null))
       );
   }
 
   /**
    * GET - get`s the total amount of questions
+   * @return - total amount of questions
    */
   getQuestionAmount(): Observable<number> {
     return this.http.get<number>(`${apiBaseUrl}/getNumberOfQuestions`)
@@ -52,16 +59,17 @@ export class QuizService {
 
   /**
    * GET - checks if a question was correctly answered
+   * @param uuid - unique user id
    * @param questionId - id of the question
    * @param answerIndexes - indexes of the chosen answers
    */
-  checkAnswer(questionId: number, answerIndexes: number[]): Observable<boolean | null> {
+  checkAnswer(uuid: string, questionId: number, answerIndexes: number[]): Observable<boolean | null> {
     const chosenAnswerIndexes = answerIndexes.map(i => i + 1).join('');
 
-    return this.http.get<boolean>(`${apiBaseUrl}/sendAnswer?qid=${questionId}&answer=${chosenAnswerIndexes}`)
+    return this.http.get<boolean>(`${apiBaseUrl}/sendAnswer?uuid=${uuid}?qid=${questionId}&answer=${chosenAnswerIndexes}`)
       .pipe(
-        tap(value => console.log(`QuizService - checkAnswer(${questionId}, ${chosenAnswerIndexes})`)),
-        catchError(this.handleError(`checkAnswer(${questionId}, ${chosenAnswerIndexes})`, null))
+        tap(value => console.log(`QuizService - checkAnswer(${uuid}, ${questionId}, ${chosenAnswerIndexes})`)),
+        catchError(this.handleError(`checkAnswer(${uuid}, ${questionId}, ${chosenAnswerIndexes})`, null))
       );
   }
 

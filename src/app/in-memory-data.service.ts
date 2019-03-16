@@ -48,7 +48,7 @@ export class InMemoryDataService implements InMemoryDbService {
 
     const questionsAmount = this.question.length;
 
-    const registerUser = {};
+    const registerUser = 'abc123';
 
     return {question, questionCorrectAnswer, questionsAmount, registerUser};
   }
@@ -62,7 +62,7 @@ export class InMemoryDataService implements InMemoryDbService {
       newUrl = 'api/questionCorrectAnswer';
     } else if (url === 'rest/demo/getNumberOfQuestions') {
       newUrl = 'api/questionsAmount';
-    } else if (url === 'rest/demo/getQuestion') {
+    } else if (url.includes('rest/demo/getQuestion')) {
       const questionId = Math.floor(Math.random() * this.question.length);
 
       newUrl = `api/question/${questionId}`;

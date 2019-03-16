@@ -12,17 +12,18 @@ export class QuizResultService {
   correctAnsweredQuestions: number;
   totalQuestions: number;
   userId: string;
+  uuid: string;
 
   constructor(private http: HttpClient) { }
 
   /**
    * GET - get`s the total amount of correct answered questions
    */
-  getCorrectQuestionsAmount(userId: string): Observable<number> {
-    return this.http.get<number>(`${apiBaseUrl}/getResults?uid=${userId}`)
+  getCorrectQuestionsAmount(uuid: string): Observable<number> {
+    return this.http.get<number>(`${apiBaseUrl}/getResults?uuid=${uuid}`)
       .pipe(
-        tap(data => console.log(`QuizResultService - getCorrectQuestionsAmount(${userId})`)),
-        catchError(this.handleError(`getCorrectQuestionsAmount(${userId})`, 0))
+        tap(data => console.log(`QuizResultService - getCorrectQuestionsAmount(${uuid})`)),
+        catchError(this.handleError(`getCorrectQuestionsAmount(${uuid})`, 0))
       );
   }
 
