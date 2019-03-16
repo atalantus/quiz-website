@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of, pipe} from 'rxjs';
 import {Question} from '../value-types/question';
 import {catchError, map, tap} from 'rxjs/operators';
+import {text} from '@angular/core/src/render3';
+import {forEach} from '@angular/router/src/utils/collection';
 
 const apiBaseUrl = 'rest/demo';
 
@@ -20,7 +22,7 @@ export class QuizService {
    * @return - the unique user id for the client
    */
   registerUser(uid: string): Observable<string> {
-    return this.http.get<string>(`${apiBaseUrl}/start?userid=${uid}`)
+    return this.http.get(`${apiBaseUrl}/start?userid=${uid}`, {responseType: 'text'})
       .pipe(
         tap(data => console.log(`QuizService - registerUser(${uid})`)),
         catchError(this.handleError(`registerUser(${uid})`, ''))
@@ -29,19 +31,29 @@ export class QuizService {
 
   /**
    * GET - get`s a question
-   * @param uuid - unique user id
+   * @param alreadyAsked - collection of the ids of the already asked questions
    * @return - null if an error occurred otherwise a Question object
    */
-  getQuestion(uuid: string): Observable<Question | null> {
-    return this.http.get<Question>(`${apiBaseUrl}/getQuestion?uuid=${uuid}`)
+  getQuestion(alreadyAsked: number[]): Observable<Question | null> {
+    let alreadyAskedIds = '';
+
+    alreadyAsked.forEach(id => {
+      alreadyAskedIds += `&id=${id}`;
+    });
+
+    if (alreadyAskedIds !== '') {
+      alreadyAskedIds = alreadyAskedIds.substring(1);
+    }
+
+    return this.http.get<Question>(`${apiBaseUrl}/getQuestion?${alreadyAskedIds}`)
       .pipe(
-        tap(data => console.log(`QuizSerivce - getQuestion(${uuid})`)),
+        tap(data => console.log(`QuizSerivce - getQuestion(${alreadyAsked})`)),
         map(data => {
           const q = new Question();
           q.loadData(data);
           return q;
         }),
-        catchError(this.handleError(`getQuestion(${uuid})`, null))
+        catchError(this.handleError(`getQuestion(${alreadyAsked})`, null))
       );
   }
 

@@ -17,6 +17,7 @@ export class QuestionComponent implements OnInit {
   questionsAmount: number;
   loadingQuestion: boolean;
   uuid: string;
+  askedQuestions: number[];
 
   @ViewChild('answerACheckbox') answerACheckbox;
   @ViewChild('answerBCheckbox') answerBCheckbox;
@@ -31,6 +32,7 @@ export class QuestionComponent implements OnInit {
 
   ngOnInit() {
     this.uuid = this.quizResultService.uuid;
+    this.askedQuestions = [];
 
     this.currentQuestion = 1;
     this.getQuestionsAmount();
@@ -53,7 +55,7 @@ export class QuestionComponent implements OnInit {
   }
 
   getQuestion() {
-    this.quizService.getQuestion(this.uuid).subscribe(question => {
+    this.quizService.getQuestion(this.askedQuestions).subscribe(question => {
       this.loadingQuestion = false;
 
       if (this.answerACheckbox !== undefined) {
@@ -80,6 +82,8 @@ export class QuestionComponent implements OnInit {
 
   sendAnswers() {
     this.loadingQuestion = true;
+
+    this.askedQuestions.push(this.question.id);
 
     const answers = [];
 
