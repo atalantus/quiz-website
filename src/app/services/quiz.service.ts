@@ -43,9 +43,10 @@ export class QuizService {
 
     if (alreadyAskedIds !== '') {
       alreadyAskedIds = alreadyAskedIds.substring(1);
+      alreadyAskedIds = '?' + alreadyAskedIds;
     }
 
-    return this.http.get<Question>(`${apiBaseUrl}/getQuestion?${alreadyAskedIds}`)
+    return this.http.get<Question>(`${apiBaseUrl}/getQuestion${alreadyAskedIds}`)
       .pipe(
         tap(data => console.log(`QuizSerivce - getQuestion(${alreadyAsked})`)),
         map(data => {
@@ -78,7 +79,7 @@ export class QuizService {
   checkAnswer(uuid: string, questionId: number, answerIndexes: number[]): Observable<boolean | null> {
     const chosenAnswerIndexes = answerIndexes.map(i => i + 1).join('');
 
-    return this.http.get<boolean>(`${apiBaseUrl}/sendAnswer?uuid=${uuid}?qid=${questionId}&answer=${chosenAnswerIndexes}`)
+    return this.http.get<boolean>(`${apiBaseUrl}/sendAnswer?uuid=${uuid}&qid=${questionId}&answer=${chosenAnswerIndexes}`)
       .pipe(
         tap(value => console.log(`QuizService - checkAnswer(${uuid}, ${questionId}, ${chosenAnswerIndexes})`)),
         catchError(this.handleError(`checkAnswer(${uuid}, ${questionId}, ${chosenAnswerIndexes})`, null))
