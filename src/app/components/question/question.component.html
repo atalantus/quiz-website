@@ -36,7 +36,7 @@
       </div>
 
       <div id="questionActionsContainer">
-        <button mat-raised-button color="{{currentQuestion < questionsAmount ? 'primary' : 'accent'}}" (click)="continue()">{{currentQuestion < questionsAmount ? 'Next question' : 'Show results'}}</button>
+        <button [disabled]="loadingQuestion" mat-raised-button color="{{currentQuestion < questionsAmount ? 'primary' : 'accent'}}" (click)="continue()">{{currentQuestion < questionsAmount ? 'Next question' : 'Show results'}}</button>
       </div>
 
     </div>
