@@ -31,42 +31,32 @@ export class QuizService {
 
   /**
    * GET - get`s a question
-   * @param alreadyAsked - collection of the ids of the already asked questions
+   * @param uuid - unique user id
    * @return - null if an error occurred otherwise a Question object
    */
-  getQuestion(alreadyAsked: number[]): Observable<Question | null> {
-    let alreadyAskedIds = '';
-
-    alreadyAsked.forEach(id => {
-      alreadyAskedIds += `&id=${id}`;
-    });
-
-    if (alreadyAskedIds !== '') {
-      alreadyAskedIds = alreadyAskedIds.substring(1);
-      alreadyAskedIds = '?' + alreadyAskedIds;
-    }
-
-    return this.http.get<Question>(`${apiBaseUrl}/getQuestion${alreadyAskedIds}`)
+  getQuestion(uuid: string): Observable<Question | null> {
+    return this.http.get<Question>(`${apiBaseUrl}/getQuestion?uuid=${uuid}`)
       .pipe(
-        tap(data => console.log(`QuizSerivce - getQuestion(${alreadyAsked})`)),
+        tap(data => console.log(`QuizSerivce - getQuestion(${uuid})`)),
         map(data => {
           const q = new Question();
           q.loadData(data);
           return q;
         }),
-        catchError(this.handleError(`getQuestion(${alreadyAsked})`, null))
+        catchError(this.handleError(`getQuestion(${uuid})`, null))
       );
   }
 
   /**
    * GET - get`s the total amount of questions
+   * @param uuid - unique user id
    * @return - total amount of questions
    */
-  getQuestionAmount(): Observable<number> {
-    return this.http.get<number>(`${apiBaseUrl}/getNumberOfQuestions`)
+  getQuestionAmount(uuid: string): Observable<number> {
+    return this.http.get<number>(`${apiBaseUrl}/getNumberOfQuestions?uuid=${uuid}`)
       .pipe(
-        tap(data => console.log(`QuizService - getQuestionAmount()`)),
-        catchError(this.handleError(`getQuestionAmount()`, -1))
+        tap(data => console.log(`QuizService - getQuestionAmount(${uuid})`)),
+        catchError(this.handleError(`getQuestionAmount(${uuid})`, -1))
       );
   }
 
@@ -83,6 +73,17 @@ export class QuizService {
       .pipe(
         tap(value => console.log(`QuizService - checkAnswer(${uuid}, ${questionId}, ${chosenAnswerIndexes})`)),
         catchError(this.handleError(`checkAnswer(${uuid}, ${questionId}, ${chosenAnswerIndexes})`, null))
+      );
+  }
+
+  /**
+   * GET - get`s the total amount of correct answered questions
+   */
+  getCorrectQuestionsAmount(uuid: string): Observable<number> {
+    return this.http.get<number>(`${apiBaseUrl}/getResults?uuid=${uuid}`)
+      .pipe(
+        tap(data => console.log(`QuizResultService - getCorrectQuestionsAmount(${uuid})`)),
+        catchError(this.handleError(`getCorrectQuestionsAmount(${uuid})`, 0))
       );
   }
 

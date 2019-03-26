@@ -60,7 +60,7 @@ export class InMemoryDataService implements InMemoryDbService {
       console.log(requestInfoUtils);
 
       newUrl = 'api/questionCorrectAnswer';
-    } else if (url === 'rest/demo/getNumberOfQuestions') {
+    } else if (url.includes('rest/demo/getNumberOfQuestions')) {
       newUrl = 'api/questionsAmount';
     } else if (url.includes('rest/demo/getQuestion')) {
       const questionId = Math.floor(Math.random() * this.question.length);

@@ -40,7 +40,7 @@ export class QuestionComponent implements OnInit {
   }
 
   getQuestionsAmount() {
-    this.quizService.getQuestionAmount().subscribe(amount => {
+    this.quizService.getQuestionAmount(this.uuid).subscribe(amount => {
       if (amount !== -1) {
         console.log('Loaded total amount of questions successfully');
         console.log(amount);
@@ -55,7 +55,7 @@ export class QuestionComponent implements OnInit {
   }
 
   getQuestion() {
-    this.quizService.getQuestion(this.askedQuestions).subscribe(question => {
+    this.quizService.getQuestion(this.uuid).subscribe(question => {
       this.loadingQuestion = false;
 
       if (this.answerACheckbox !== undefined) {
@@ -105,7 +105,7 @@ export class QuestionComponent implements OnInit {
 
       if (this.currentQuestion >= this.questionsAmount) {
 
-        this.quizResultService.getCorrectQuestionsAmount(this.uuid).subscribe(amount => {
+        this.quizService.getCorrectQuestionsAmount(this.uuid).subscribe(amount => {
           this.quizResultService.correctAnsweredQuestions = amount;
 
           this.router.navigateByUrl('/result');
