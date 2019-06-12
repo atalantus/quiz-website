@@ -14,7 +14,7 @@ import {
   MatCheckboxModule, MatFormFieldModule, MatInputModule,
   MatProgressBarModule,
   MatProgressSpinnerModule,
-  MatRippleModule
+  MatRippleModule, MatSelectModule
 } from '@angular/material';
 import {HomeComponent} from './components/home/home.component';
 import {ResultComponent} from './components/result/result.component';
@@ -46,6 +46,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatCheckboxModule,
     MatButtonModule,
     MatProgressBarModule,
+    MatSelectModule,
     MatInputModule
   ],
   providers: [],
