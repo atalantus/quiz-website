@@ -30,18 +30,18 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.userBeltInput);
   }
 
   startQuiz() {
     const uid = this.userIdInput.nativeElement.value;
-
-    console.log(this.userBeltInput);
+    const belt = this.userBeltInput.value;
 
     this.quizResultService.userId = uid;
 
-    this.quizService.registerUser(uid).subscribe(uuid => {
+    this.quizService.registerUser(uid, belt.value).subscribe(uuid => {
       this.quizResultService.uuid = uuid;
+      this.quizResultService.selectedBelt = belt;
+
       // Start quiz
       this.router.navigateByUrl('/question');
     });

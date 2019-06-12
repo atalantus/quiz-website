@@ -19,7 +19,7 @@
           <mat-form-field appearance="outline">
             <mat-label>Belt</mat-label>
             <mat-select #userBeltInput>
-              <mat-option *ngFor="let belt of belts" [value]="belt.value">
+              <mat-option *ngFor="let belt of belts" [value]="belt">
                 {{belt.viewValue}}
               </mat-option>
             </mat-select>

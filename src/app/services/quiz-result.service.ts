@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {Belt} from '../components/home/home.component';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class QuizResultService {
   totalQuestions: number;
   userId: string;
   uuid: string;
+  selectedBelt: Belt;
 
   constructor() { }
 }
