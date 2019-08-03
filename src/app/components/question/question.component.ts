@@ -68,6 +68,7 @@ export class QuestionComponent implements OnInit {
       if (question != null) {
         console.log('Loaded question successfully');
         console.log(question);
+
         this.question = question;
       } else {
         console.log('An error occurred while loading the question!');

@@ -20,26 +20,28 @@ export class InMemoryDataService implements InMemoryDbService {
       answer1: 'Earth',
       answer2: 'Mercury',
       answer3: 'Mars',
-      answer4: 'Venus',
+      answer4: '-',
       id: 1
     },
     {
       question: 'What is the largest number of five digits?',
       answer1: '00000',
       answer2: '1234567890',
-      answer3: '99999',
-      answer4: '23495',
+      answer3: '-',
+      answer4: '-',
       id: 2
     },
     {
       question: 'What colour to do you get when you mix red and white?',
       answer1: 'Blue',
-      answer2: 'White',
-      answer3: 'Red',
-      answer4: 'Pink',
+      answer2: '-',
+      answer3: '-',
+      answer4: '-',
       id: 3
     }
   ];
+
+  nextQuestion = 0;
 
   createDb() {
     const question = this.question;
@@ -63,7 +65,9 @@ export class InMemoryDataService implements InMemoryDbService {
     } else if (url.includes('rest/demo/getNumberOfQuestions')) {
       newUrl = 'api/questionsAmount';
     } else if (url.includes('rest/demo/getQuestion')) {
-      const questionId = Math.floor(Math.random() * this.question.length);
+      const questionId = this.nextQuestion;
+
+      this.nextQuestion++;
 
       newUrl = `api/question/${questionId}`;
     } else if (url.includes('rest/demo/start?userid')) {

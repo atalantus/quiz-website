@@ -35,11 +35,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // TODO: Remove it when a real server is ready to receive requests.
-    /*
+
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, {dataEncapsulation: false, passThruUnknownUrl: false, delay: 1000}
     ),
-    */
+
     MatCardModule,
     MatProgressSpinnerModule,
     MatRippleModule,
