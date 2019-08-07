@@ -14,7 +14,7 @@ export class InMemoryDataService implements InMemoryDbService {
       answer3: 'New York',
       answer4: 'Gotham City',
       id: 0,
-      correct: 4
+      correct: '34'
     },
     {
       question: 'Which planet is nearest the sun?',
@@ -23,7 +23,7 @@ export class InMemoryDataService implements InMemoryDbService {
       answer3: 'Mars',
       answer4: '-',
       id: 1,
-      correct: 3
+      correct: '12'
     },
     {
       question: 'What is the largest number of five digits?',
@@ -32,7 +32,7 @@ export class InMemoryDataService implements InMemoryDbService {
       answer3: '-',
       answer4: '-',
       id: 2,
-      correct: 2
+      correct: '2'
     },
     {
       question: 'What colour to do you get when you mix red and white?',
@@ -41,7 +41,7 @@ export class InMemoryDataService implements InMemoryDbService {
       answer3: '-',
       answer4: '-',
       id: 3,
-      correct: 1
+      correct: '1'
     }
   ];
 

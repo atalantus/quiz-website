@@ -29,6 +29,6 @@
     </table>
 
 
-    <button [disabled]="!userIdInput.value || !userBeltInput.value" mat-raised-button color="primary" (click)="startQuiz()">Start Test</button>
+    <button [disabled]="!userIdInput.value || !userBeltInput.value || started" mat-raised-button color="primary" (click)="startQuiz()">Start Test</button>
   </div>
 </div>

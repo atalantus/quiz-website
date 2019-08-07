@@ -15,6 +15,8 @@ export interface Belt {
 })
 export class HomeComponent implements OnInit {
 
+  started = false;
+
   @ViewChild('userIdInput') userIdInput;
   @ViewChild('userBeltInput') userBeltInput;
 
@@ -33,6 +35,8 @@ export class HomeComponent implements OnInit {
   }
 
   startQuiz() {
+    this.started = true;
+
     const uid = this.userIdInput.nativeElement.value;
     const belt = this.userBeltInput.value;
 

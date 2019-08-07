@@ -1,0 +1,118 @@
+.container {
+  height: 100%;
+  overflow: auto;
+
+  #questionContainer {
+    margin-top: 10vh;
+
+    #questionCard {
+      text-align: center;
+
+      mat-card-header {
+        flex-direction: row-reverse;
+        margin-bottom: 12px;
+
+        div.mat-h2 {
+          margin-bottom: 0;
+        }
+      }
+
+      mat-card-content.mat-headline {
+        font-size: 24px;
+      }
+
+      mat-card-actions {
+        margin-bottom: -16px;
+        margin-left: -16px;
+        margin-right: -16px;
+        height: 4px;
+
+        mat-progress-bar {
+          -webkit-border-radius: 15px;
+          -moz-border-radius: 15px;
+          border-radius: 15px;
+        }
+      }
+    }
+
+    #answerContainer {
+      margin-top: 5vh;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: baseline;
+
+      mat-card {
+        margin-bottom: 10px;
+        width: 400px;
+        min-width: 100px;
+
+        mat-checkbox {
+          /*
+          .mat-checkbox-disabled .mat-checkbox-label {
+            color: rgba(0, 0, 0, 0.87) !important;
+          }
+
+          .mat-checkbox-disabled:not(.mat-checkbox-checked) .mat-checkbox-frame {
+            border-color: rgba(160, 160, 160, 0.93) !important;
+          }
+           */
+        }
+      }
+
+      @media (min-width: 768px) {
+        mat-card {
+          width: 500px;
+        }
+      }
+
+      @media (min-width: 992px) {
+        mat-card {
+          width: 700px;
+        }
+      }
+
+      @media (min-width: 1200px) {
+        mat-card {
+          width: 400px;
+        }
+      }
+    }
+
+    #questionActionsContainer {
+      margin-top: 5vh;
+      display: flex;
+      flex-direction: row-reverse;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  #questionContainer {
+    margin-top: 20vh !important;
+  }
+
+  #answerContainer {
+    margin-top: 10vh !important;
+  }
+
+  #questionActionsContainer {
+    margin-top: 15vh !important;
+  }
+}
+
+#loadingQuestionContainer {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.mat-checkbox-layout {
+  text-align: start;
+  white-space: normal !important;
+}

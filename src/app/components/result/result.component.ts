@@ -1,6 +1,7 @@
 import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {QuizResultService} from '../../services/quiz-result.service';
 import {QuizService} from '../../services/quiz.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-result',
@@ -20,13 +21,12 @@ export class ResultComponent implements AfterViewInit {
 
   constructor(private quizService: QuizService,
               private quizResultService: QuizResultService,
-              private changeDetectorRef: ChangeDetectorRef) {
+              private changeDetectorRef: ChangeDetectorRef,
+              private router: Router) {
   }
 
   showDetails() {
-    this.quizService.getResultDetails(this.quizResultService.uuid).subscribe(data => {
-      console.log(data);
-    });
+    this.router.navigateByUrl('/resultDetails');
   }
 
   ngAfterViewInit() {

@@ -19,13 +19,15 @@ import {
 import {HomeComponent} from './components/home/home.component';
 import {ResultComponent} from './components/result/result.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ResultDetailsComponent } from './components/result-details/result-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     QuestionComponent,
     HomeComponent,
-    ResultComponent
+    ResultComponent,
+    ResultDetailsComponent
   ],
   imports: [
     BrowserModule,
