@@ -1,5 +1,6 @@
 import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {QuizResultService} from '../../services/quiz-result.service';
+import {QuizService} from '../../services/quiz.service';
 
 @Component({
   selector: 'app-result',
@@ -15,10 +16,17 @@ export class ResultComponent implements AfterViewInit {
   correctAnswered: number;
   totalQuestions: number;
 
-  @ViewChild('resultDataTable') resultDataTable;
+  @ViewChild('resultDataContainer') resultDataContainer;
 
-  constructor(private quizResultService: QuizResultService,
+  constructor(private quizService: QuizService,
+              private quizResultService: QuizResultService,
               private changeDetectorRef: ChangeDetectorRef) {
+  }
+
+  showDetails() {
+    this.quizService.getResultDetails(this.quizResultService.uuid).subscribe(data => {
+      console.log(data);
+    });
   }
 
   ngAfterViewInit() {
@@ -47,8 +55,7 @@ export class ResultComponent implements AfterViewInit {
 
     await this.delay(250);
 
-    console.log(this.resultDataTable);
-    this.resultDataTable.nativeElement.className = '';
+    this.resultDataContainer.nativeElement.className = '';
   }
 
   async startResultAnimation() {

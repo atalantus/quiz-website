@@ -9,11 +9,12 @@ export class InMemoryDataService implements InMemoryDbService {
   question = [
     {
       question: 'Which fictional city is the home of Batman?',
-      answer1: 'Gotham City',
+      answer1: 'Atlantis',
       answer2: 'Munich',
       answer3: 'New York',
-      answer4: 'Atlantis',
-      id: 0
+      answer4: 'Gotham City',
+      id: 0,
+      correct: 4
     },
     {
       question: 'Which planet is nearest the sun?',
@@ -21,7 +22,8 @@ export class InMemoryDataService implements InMemoryDbService {
       answer2: 'Mercury',
       answer3: 'Mars',
       answer4: '-',
-      id: 1
+      id: 1,
+      correct: 3
     },
     {
       question: 'What is the largest number of five digits?',
@@ -29,7 +31,8 @@ export class InMemoryDataService implements InMemoryDbService {
       answer2: '1234567890',
       answer3: '-',
       answer4: '-',
-      id: 2
+      id: 2,
+      correct: 2
     },
     {
       question: 'What colour to do you get when you mix red and white?',
@@ -37,7 +40,8 @@ export class InMemoryDataService implements InMemoryDbService {
       answer2: '-',
       answer3: '-',
       answer4: '-',
-      id: 3
+      id: 3,
+      correct: 1
     }
   ];
 
@@ -74,6 +78,8 @@ export class InMemoryDataService implements InMemoryDbService {
       newUrl = 'api/registerUser';
     } else if (url.includes('rest/demo/getResults')) {
       newUrl = 'api/questionsAmount';
+    } else if (url.includes('rest/demo/getResultDetails')) {
+      newUrl = 'api/question';
     }
 
     return requestInfoUtils.parseRequestUrl(newUrl);

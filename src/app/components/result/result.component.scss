@@ -16,7 +16,7 @@
 
   }
 
-  table {
+  #resultDataContainer {
     -webkit-transition: opacity 0.75s ease-in-out;
     -moz-transition: opacity 0.75s ease-in-out;
     -ms-transition: opacity 0.75s ease-in-out;
@@ -30,6 +30,10 @@
 
     &.hidden {
       opacity: 0;
+    }
+
+    table {
+      margin-bottom: 25px;
     }
   }
 }

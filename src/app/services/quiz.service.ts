@@ -38,7 +38,7 @@ export class QuizService {
   getQuestion(uuid: string): Observable<Question | null> {
     return this.http.get<Question>(`${apiBaseUrl}/getQuestion?uuid=${uuid}`)
       .pipe(
-        tap(data => console.log(`QuizSerivce - getQuestion(${uuid})`)),
+        tap(data => console.log(`QuizService - getQuestion(${uuid})`)),
         map(data => {
           const q = new Question();
           q.loadData(data);
@@ -83,8 +83,30 @@ export class QuizService {
   getCorrectQuestionsAmount(uuid: string): Observable<number> {
     return this.http.get<number>(`${apiBaseUrl}/getResults?uuid=${uuid}`)
       .pipe(
-        tap(data => console.log(`QuizResultService - getCorrectQuestionsAmount(${uuid})`)),
+        tap(data => console.log(`QuizService - getCorrectQuestionsAmount(${uuid})`)),
         catchError(this.handleError(`getCorrectQuestionsAmount(${uuid})`, 0))
+      );
+  }
+
+  /**
+   * GET - get`s the wrong answered questions
+   * @param uuid - unique user id
+   * @return - null if an error occurred otherwise a Question objects array
+   */
+  getResultDetails(uuid: string): Observable<Question[] | null> {
+    return this.http.get<Question[]>(`${apiBaseUrl}/getResultDetails?uuid=${uuid}`)
+      .pipe(
+        tap(data => console.log(`QuizService - getResultDetails(${uuid})`)),
+        map(data => {
+          const qResultDetails = [];
+          data.map(d => {
+            const q = new Question();
+            q.loadData(d);
+            qResultDetails.push(q);
+          });
+          return qResultDetails;
+        }),
+        catchError(this.handleError(`getResultDetails(${uuid})`, null))
       );
   }
 
