@@ -7,7 +7,8 @@ import {Location} from '@angular/common';
 @Component({
   selector: 'app-result-details',
   templateUrl: './result-details.component.html',
-  styleUrls: ['./result-details.component.scss']
+  styleUrls: ['./result-details.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ResultDetailsComponent implements OnInit {
 

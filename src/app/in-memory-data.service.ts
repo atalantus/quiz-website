@@ -18,10 +18,10 @@ export class InMemoryDataService implements InMemoryDbService {
     },
     {
       question: 'Which planet is nearest the sun?',
-      answer1: 'Earth',
+      answer1: 'Lorem ipsum sit dolem lala Lorem ipsum Lorem ipsum lala tam kot',
       answer2: 'Mercury',
       answer3: 'Mars',
-      answer4: '-',
+      answer4: 'n/a',
       id: 1,
       correct: '12'
     },
@@ -29,17 +29,17 @@ export class InMemoryDataService implements InMemoryDbService {
       question: 'What is the largest number of five digits?',
       answer1: '00000',
       answer2: '1234567890',
-      answer3: '-',
-      answer4: '-',
+      answer3: 'n/a',
+      answer4: 'n/a',
       id: 2,
       correct: '2'
     },
     {
       question: 'What colour to do you get when you mix red and white?',
       answer1: 'Blue',
-      answer2: '-',
-      answer3: '-',
-      answer4: '-',
+      answer2: 'n/a',
+      answer3: 'n/a',
+      answer4: 'n/a',
       id: 3,
       correct: '1'
     }

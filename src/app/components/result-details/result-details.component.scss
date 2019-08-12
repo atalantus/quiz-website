@@ -47,16 +47,9 @@
         width: 400px;
         min-width: 100px;
 
-        mat-checkbox {
-          /*
-          .mat-checkbox-disabled .mat-checkbox-label {
-            color: rgba(0, 0, 0, 0.87) !important;
-          }
-
-          .mat-checkbox-disabled:not(.mat-checkbox-checked) .mat-checkbox-frame {
-            border-color: rgba(160, 160, 160, 0.93) !important;
-          }
-           */
+        &:hover {
+          background: rgb(255, 255, 255);
+          cursor: default;
         }
       }
 
@@ -115,4 +108,16 @@
 .mat-checkbox-layout {
   text-align: start;
   white-space: normal !important;
+}
+
+.mat-checkbox-disabled .mat-checkbox-label {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+.mat-checkbox-disabled:not(.mat-checkbox-checked) .mat-checkbox-frame {
+  border-color: rgba(0,0,0,.54) !important;
+}
+
+.mat-checkbox-checked.mat-primary .mat-checkbox-background, .mat-checkbox-indeterminate.mat-primary .mat-checkbox-background {
+  background-color: #3f51b5 !important;
 }

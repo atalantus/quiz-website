@@ -18,22 +18,22 @@
 
       <div id="answerContainer">
         <mat-card
-          [ngStyle]="{'visibility': questionResultDetail[currentQuestion].answers[0] === '-' ? 'hidden' : 'visible'}">
+          [ngStyle]="{'visibility': questionResultDetail[currentQuestion].answers[0] === 'n/a' ? 'hidden' : 'visible'}">
           <mat-checkbox #answerACheckbox color="primary" disabled
                         [checked]="questionResultDetail[currentQuestion].correct.includes('1')">{{questionResultDetail[currentQuestion].answers[0]}}</mat-checkbox>
         </mat-card>
         <mat-card
-          [ngStyle]="{'visibility': questionResultDetail[currentQuestion].answers[1] === '-' ? 'hidden' : 'visible'}">
+          [ngStyle]="{'visibility': questionResultDetail[currentQuestion].answers[1] === 'n/a' ? 'hidden' : 'visible'}">
           <mat-checkbox #answerBCheckbox color="primary" disabled
                         [checked]="questionResultDetail[currentQuestion].correct.includes('2')">{{questionResultDetail[currentQuestion].answers[1]}}</mat-checkbox>
         </mat-card>
         <mat-card
-          [ngStyle]="{'visibility': questionResultDetail[currentQuestion].answers[2] === '-' ? 'hidden' : 'visible'}">
+          [ngStyle]="{'visibility': questionResultDetail[currentQuestion].answers[2] === 'n/a' ? 'hidden' : 'visible'}">
           <mat-checkbox #answerCCheckbox color="primary" disabled
                         [checked]="questionResultDetail[currentQuestion].correct.includes('3')">{{questionResultDetail[currentQuestion].answers[2]}}</mat-checkbox>
         </mat-card>
         <mat-card
-          [ngStyle]="{'visibility': questionResultDetail[currentQuestion].answers[3] === '-' ? 'hidden' : 'visible'}">
+          [ngStyle]="{'visibility': questionResultDetail[currentQuestion].answers[3] === 'n/a' ? 'hidden' : 'visible'}">
           <mat-checkbox #answerDCheckbox color="primary" disabled
                         [checked]="questionResultDetail[currentQuestion].correct.includes('4')">{{questionResultDetail[currentQuestion].answers[3]}}</mat-checkbox>
         </mat-card>

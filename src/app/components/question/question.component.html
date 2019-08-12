@@ -21,16 +21,16 @@
       </mat-card>
 
       <div id="answerContainer">
-        <mat-card mat-ripple (click)="clickedCard(0)" [ngStyle]="{'visibility': question.answers[0] === '-' ? 'hidden' : 'visible'}">
+        <mat-card mat-ripple (click)="clickedCard(0)" [ngStyle]="{'visibility': question.answers[0] === 'n/a' ? 'hidden' : 'visible'}">
           <mat-checkbox #answerACheckbox (click)="alreadyToggled = true;" color="primary">{{question.answers[0]}}</mat-checkbox>
         </mat-card>
-        <mat-card mat-ripple (click)="clickedCard(1)" [ngStyle]="{'visibility': question.answers[1] === '-' ? 'hidden' : 'visible'}">
+        <mat-card mat-ripple (click)="clickedCard(1)" [ngStyle]="{'visibility': question.answers[1] === 'n/a' ? 'hidden' : 'visible'}">
           <mat-checkbox #answerBCheckbox (click)="alreadyToggled = true;" color="primary">{{question.answers[1]}}</mat-checkbox>
         </mat-card>
-        <mat-card mat-ripple (click)="clickedCard(2)" [ngStyle]="{'visibility': question.answers[2] === '-' ? 'hidden' : 'visible'}">
+        <mat-card mat-ripple (click)="clickedCard(2)" [ngStyle]="{'visibility': question.answers[2] === 'n/a' ? 'hidden' : 'visible'}">
           <mat-checkbox #answerCCheckbox (click)="alreadyToggled = true;" color="primary">{{question.answers[2]}}</mat-checkbox>
         </mat-card>
-        <mat-card mat-ripple (click)="clickedCard(3)" [ngStyle]="{'visibility': question.answers[3] === '-' ? 'hidden' : 'visible'}">
+        <mat-card mat-ripple (click)="clickedCard(3)" [ngStyle]="{'visibility': question.answers[3] === 'n/a' ? 'hidden' : 'visible'}">
           <mat-checkbox #answerDCheckbox (click)="alreadyToggled = true;" color="primary">{{question.answers[3]}}</mat-checkbox>
         </mat-card>
       </div>
