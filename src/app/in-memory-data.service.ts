@@ -54,9 +54,11 @@ export class InMemoryDataService implements InMemoryDbService {
 
     const questionsAmount = this.question.length;
 
+    const wrongAnsweredQuestionIds = '0,1,2,3';
+
     const registerUser = 'abc123';
 
-    return {question, questionCorrectAnswer, questionsAmount, registerUser};
+    return {question, questionCorrectAnswer, wrongAnsweredQuestionIds, questionsAmount, registerUser};
   }
 
   parseRequestUrl(url: string, requestInfoUtils: RequestInfoUtilities): ParsedRequestUrl {
@@ -77,7 +79,7 @@ export class InMemoryDataService implements InMemoryDbService {
     } else if (url.includes('rest/demo/start?userid')) {
       newUrl = 'api/registerUser';
     } else if (url.includes('rest/demo/getResults')) {
-      newUrl = 'api/questionsAmount';
+      newUrl = 'api/wrongAnsweredQuestionIds';
     } else if (url.includes('rest/demo/getResultDetails')) {
       newUrl = 'api/question';
     }

@@ -10,6 +10,7 @@ import {Belt} from '../components/home/home.component';
 export class QuizResultService {
   correctAnsweredQuestions: number;
   totalQuestions: number;
+  wrongAnsweredQuestionIds: string[];
   userId: string;
   uuid: string;
   selectedBelt: Belt;

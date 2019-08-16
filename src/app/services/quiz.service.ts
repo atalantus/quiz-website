@@ -78,13 +78,17 @@ export class QuizService {
   }
 
   /**
-   * GET - get`s the total amount of correct answered questions
+   * GET - get`s the IDs of the wrong answered questions
    */
-  getCorrectQuestionsAmount(uuid: string): Observable<number> {
-    return this.http.get<number>(`${apiBaseUrl}/getResults?uuid=${uuid}`)
+  getWrongAnsweredQuestionIDs(uuid: string): Observable<string[] | null> {
+    return this.http.get<string>(`${apiBaseUrl}/getResults?uuid=${uuid}`)
       .pipe(
-        tap(data => console.log(`QuizService - getCorrectQuestionsAmount(${uuid})`)),
-        catchError(this.handleError(`getCorrectQuestionsAmount(${uuid})`, 0))
+        tap(data => console.log(`QuizService - getWrongAnsweredQuestionIDs(${uuid})`)),
+        map(data => {
+          return data.split(',');
+          }
+        ),
+        catchError(this.handleError(`getWrongAnsweredQuestionIDs(${uuid})`, null))
       );
   }
 

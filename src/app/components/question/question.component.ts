@@ -46,7 +46,7 @@ export class QuestionComponent implements OnInit {
         console.log(amount);
         this.questionsAmount = amount;
       } else {
-        console.log('An error occurred while loadingQuestion the total amount of questions!');
+        console.error('An error occurred while loadingQuestion the total amount of questions!');
         this.questionsAmount = 10;
       }
 
@@ -106,8 +106,9 @@ export class QuestionComponent implements OnInit {
 
       if (this.currentQuestion >= this.questionsAmount) {
 
-        this.quizService.getCorrectQuestionsAmount(this.uuid).subscribe(amount => {
-          this.quizResultService.correctAnsweredQuestions = amount;
+        this.quizService.getWrongAnsweredQuestionIDs(this.uuid).subscribe(ids => {
+          this.quizResultService.correctAnsweredQuestions = this.quizResultService.totalQuestions - ids.length;
+          this.quizResultService.wrongAnsweredQuestionIds = ids;
 
           this.router.navigateByUrl('/result');
         });
