@@ -12,10 +12,11 @@ import {Location} from '@angular/common';
 })
 export class ResultDetailsComponent implements OnInit {
 
-  questionResultDetail: Question[];
+  questionResultDetail: Question;
   currentQuestion: number;
   questionsAmount: number;
   uuid: string;
+  loadingQuestionDetails: boolean;
 
   @ViewChild('answerACheckbox') answerACheckbox;
   @ViewChild('answerBCheckbox') answerBCheckbox;
@@ -29,13 +30,20 @@ export class ResultDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.uuid = this.quizResultService.uuid;
+    this.loadingQuestionDetails = false;
 
-    this.currentQuestion = 1;
-    this.getResultDetails();
+    this.currentQuestion = -1;
+    this.questionsAmount = this.quizResultService.wrongAnsweredQuestionIds.length - 1;
+
+    this.getResultDetailsForQuestion();
   }
 
-  getResultDetails() {
-    this.quizService.getResultDetails(this.uuid).subscribe(data => {
+  getResultDetailsForQuestion() {
+    this.loadingQuestionDetails = true;
+
+    const qid = this.quizResultService.wrongAnsweredQuestionIds[this.currentQuestion + 1];
+
+    this.quizService.getResultDetails(this.uuid, qid).subscribe(data => {
       if (this.answerACheckbox !== undefined) {
         this.answerACheckbox.checked = false;
         this.answerBCheckbox.checked = false;
@@ -47,8 +55,8 @@ export class ResultDetailsComponent implements OnInit {
         console.log('Loaded result details successfully');
         console.log(data);
 
-        this.currentQuestion = 0;
-        this.questionsAmount = data.length - 1;
+        this.currentQuestion++;
+        this.loadingQuestionDetails = false;
         this.questionResultDetail = data;
       } else {
         console.log('An error occurred while loading result details!');
@@ -58,7 +66,7 @@ export class ResultDetailsComponent implements OnInit {
 
   continue() {
     if (this.currentQuestion < this.questionsAmount) {
-      this.currentQuestion++;
+      this.getResultDetailsForQuestion();
     } else {
       this.location.back();
     }

@@ -85,7 +85,7 @@ export class QuizService {
       .pipe(
         tap(data => console.log(`QuizService - getWrongAnsweredQuestionIDs(${uuid})`)),
         map(data => {
-          return data.split(',');
+            return data.split(',');
           }
         ),
         catchError(this.handleError(`getWrongAnsweredQuestionIDs(${uuid})`, null))
@@ -93,24 +93,21 @@ export class QuizService {
   }
 
   /**
-   * GET - get`s the wrong answered questions
+   * GET - get`s a wrong answered question
    * @param uuid - unique user id
+   * @param qid - question id
    * @return - null if an error occurred otherwise a Question objects array
    */
-  getResultDetails(uuid: string): Observable<Question[] | null> {
-    return this.http.get<Question[]>(`${apiBaseUrl}/getResultDetails?uuid=${uuid}`)
+  getResultDetails(uuid: string, qid: string): Observable<Question | null> {
+    return this.http.get<Question>(`${apiBaseUrl}/getResultDetails?uuid=${uuid}&qid=${qid}`)
       .pipe(
-        tap(data => console.log(`QuizService - getResultDetails(${uuid})`)),
+        tap(data => console.log(`QuizService - getResultDetails(${uuid}, ${qid})`)),
         map(data => {
-          const qResultDetails = [];
-          data.map(d => {
-            const q = new Question();
-            q.loadData(d);
-            qResultDetails.push(q);
-          });
-          return qResultDetails;
+          const q = new Question();
+          q.loadData(data);
+          return q;
         }),
-        catchError(this.handleError(`getResultDetails(${uuid})`, null))
+        catchError(this.handleError(`getResultDetails(${uuid}, ${qid})`, null))
       );
   }
 

@@ -47,6 +47,8 @@ export class InMemoryDataService implements InMemoryDbService {
 
   nextQuestion = 0;
 
+  wrongQuestionCounter = 4;
+
   createDb() {
     const question = this.question;
 
@@ -81,7 +83,11 @@ export class InMemoryDataService implements InMemoryDbService {
     } else if (url.includes('rest/demo/getResults')) {
       newUrl = 'api/wrongAnsweredQuestionIds';
     } else if (url.includes('rest/demo/getResultDetails')) {
-      newUrl = 'api/question';
+      const curId = this.wrongQuestionCounter % 4;
+
+      newUrl = `api/question/${curId}`;
+
+      this.wrongQuestionCounter++;
     }
 
     return requestInfoUtils.parseRequestUrl(newUrl);
