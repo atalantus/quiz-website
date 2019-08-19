@@ -81,7 +81,7 @@ export class QuizService {
    * GET - get`s the IDs of the wrong answered questions
    */
   getWrongAnsweredQuestionIDs(uuid: string): Observable<string[] | null> {
-    return this.http.get<string>(`${apiBaseUrl}/getResults?uuid=${uuid}`)
+    return this.http.get<string>(`${apiBaseUrl}/getResults?uuid=${uuid}`, {responseType: 'text' as 'json'})
       .pipe(
         tap(data => console.log(`QuizService - getWrongAnsweredQuestionIDs(${uuid})`)),
         map(data => {

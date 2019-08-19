@@ -18,6 +18,6 @@
         <td class="mat-h2">{{correctAnswered}}/{{totalQuestions}}</td>
       </tr>
     </table>
-    <button mat-raised-button color="accent" (click)="showDetails()">Show Details</button>
+    <button mat-raised-button color="accent" (click)="showDetails()" *ngIf="quizResultService.wrongAnsweredQuestionIds.length > 0">Show Details</button>
   </div>
 </div>
