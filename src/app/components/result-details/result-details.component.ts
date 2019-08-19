@@ -44,13 +44,6 @@ export class ResultDetailsComponent implements OnInit {
     const qid = this.quizResultService.wrongAnsweredQuestionIds[this.currentQuestion + 1];
 
     this.quizService.getResultDetails(this.uuid, qid).subscribe(data => {
-      if (this.answerACheckbox !== undefined) {
-        this.answerACheckbox.checked = false;
-        this.answerBCheckbox.checked = false;
-        this.answerCCheckbox.checked = false;
-        this.answerDCheckbox.checked = false;
-      }
-
       if (data != null) {
         console.log('Loaded result details successfully');
         console.log(data);
