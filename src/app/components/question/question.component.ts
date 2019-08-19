@@ -107,8 +107,10 @@ export class QuestionComponent implements OnInit {
       if (this.currentQuestion >= this.questionsAmount) {
 
         this.quizService.getWrongAnsweredQuestionIDs(this.uuid).subscribe(ids => {
-          this.quizResultService.correctAnsweredQuestions = this.quizResultService.totalQuestions - ids.length;
-          this.quizResultService.wrongAnsweredQuestionIds = ids;
+          if (ids !== null) {
+            this.quizResultService.correctAnsweredQuestions = this.quizResultService.totalQuestions - ids.length;
+            this.quizResultService.wrongAnsweredQuestionIds = ids
+          }
 
           this.router.navigateByUrl('/result');
         });

@@ -56,7 +56,7 @@ export class InMemoryDataService implements InMemoryDbService {
 
     const questionsAmount = this.question.length;
 
-    const wrongAnsweredQuestionIds = '0,1,2,3';
+    const wrongAnsweredQuestionIds = '0';
 
     const registerUser = 'abc123';
 

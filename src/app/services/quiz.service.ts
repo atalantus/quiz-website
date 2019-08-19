@@ -85,7 +85,12 @@ export class QuizService {
       .pipe(
         tap(data => console.log(`QuizService - getWrongAnsweredQuestionIDs(${uuid})`)),
         map(data => {
-            return data.split(',');
+            console.warn(data.split(','));
+            if (data !== '') {
+              return data.split(',');
+            } else {
+              return [];
+            }
           }
         ),
         catchError(this.handleError(`getWrongAnsweredQuestionIDs(${uuid})`, null))
