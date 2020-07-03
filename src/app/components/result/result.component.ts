@@ -20,7 +20,7 @@ export class ResultComponent implements AfterViewInit {
   @ViewChild('resultDataContainer') resultDataContainer;
 
   constructor(private quizService: QuizService,
-              private quizResultService: QuizResultService,
+              public quizResultService: QuizResultService,
               private changeDetectorRef: ChangeDetectorRef,
               private router: Router) {
   }
