@@ -20,6 +20,8 @@ import {HomeComponent} from './components/home/home.component';
 import {ResultComponent} from './components/result/result.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ResultDetailsComponent } from './components/result-details/result-details.component';
+import { ErrorBarComponent } from './components/error-bar/error-bar.component';
+import { ErrorMessageComponent } from './components/error-message/error-message.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { ResultDetailsComponent } from './components/result-details/result-detai
     QuestionComponent,
     HomeComponent,
     ResultComponent,
-    ResultDetailsComponent
+    ResultDetailsComponent,
+    ErrorBarComponent,
+    ErrorMessageComponent
   ],
   imports: [
     BrowserModule,
@@ -37,11 +41,11 @@ import { ResultDetailsComponent } from './components/result-details/result-detai
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // TODO: Remove it when a real server is ready to receive requests.
-    /*
+
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, {dataEncapsulation: false, passThruUnknownUrl: false, delay: 1000}
     ),
-    */
+
     MatCardModule,
     MatProgressSpinnerModule,
     MatRippleModule,

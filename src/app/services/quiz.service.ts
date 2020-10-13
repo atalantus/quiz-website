@@ -22,11 +22,11 @@ export class QuizService {
    * @param beltid - id of the selected belt
    * @return - the unique user id for the client
    */
-  registerUser(uid: string, beltid: string): Observable<string> {
+  registerUser(uid: string, beltid: string): Observable<string | null> {
     return this.http.get(`${apiBaseUrl}/start?userid=${uid}&examtype=${beltid}`, {responseType: 'text'})
       .pipe(
         tap(data => console.log(`QuizService - registerUser(${uid}, ${beltid})`)),
-        catchError(this.handleError(`registerUser(${uid}, ${beltid})`, ''))
+        catchError(this.handleError(`registerUser(${uid}, ${beltid})`, null))
       );
   }
 

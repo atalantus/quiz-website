@@ -43,6 +43,10 @@ export class HomeComponent implements OnInit {
     this.quizResultService.userId = uid;
 
     this.quizService.registerUser(uid, belt.value).subscribe(uuid => {
+      if (uuid === null) {
+        return;
+      }
+
       this.quizResultService.uuid = uuid;
       this.quizResultService.selectedBelt = belt;
 
